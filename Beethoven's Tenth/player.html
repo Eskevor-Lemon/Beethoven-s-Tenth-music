@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>音乐播放器</title>
+  <style>
+    body {
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      max-width: 720px;
+      margin: 50px auto;
+      padding: 20px;
+      line-height: 1.7;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+```
+.player-box {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+audio {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.note {
+  color: #666;
+  font-size: 14px;
+}
+
+a {
+  color: #3366cc;
+}
+```
+
+  </style>
+</head>
+<body>
+
+  <div class="player-box">
+    <h1 id="music-title">音乐播放器</h1>
+
+```
+<audio id="audio-player" controls preload="metadata">
+  你的浏览器不支持音频播放。
+</audio>
+
+<p class="note">
+  如果播放器无法加载，请点击：
+  <a id="direct-link" href="#" target="_blank" rel="noopener">直接打开音频文件</a>
+</p>
+```
+
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const title = params.get("title") || "未命名音乐";
+    const src = params.get("src");
+
+    const titleElement = document.getElementById("music-title");
+    const audioElement = document.getElementById("audio-player");
+    const directLink = document.getElementById("direct-link");
+
+    titleElement.textContent = title;
+
+    if (src) {
+      const audioUrl = new URL(src, window.location.href).href;
+      audioElement.src = audioUrl;
+      directLink.href = audioUrl;
+    } else {
+      titleElement.textContent = "未提供音乐链接";
+      directLink.textContent = "没有可打开的音频文件";
+    }
+  </script>
+
+</body>
+</html>
