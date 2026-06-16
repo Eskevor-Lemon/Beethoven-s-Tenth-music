@@ -51,7 +51,7 @@
   <div class="player-box">
     <h1 id="video-title">视频播放器</h1>
 
-    <video id="video-player" controls preload="metadata">
+    <video id="playerV" controls preload="metadata">
       你的浏览器不支持视频播放。
     </video>
 
@@ -68,7 +68,7 @@
     const src = params.get("src");
 
     const titleElement = document.getElementById("video-title");
-    const videoElement = document.getElementById("video-player");
+    const videoElement = document.getElementById("playerV");
     const directLink = document.getElementById("direct-link");
 
     titleElement.textContent = title;
