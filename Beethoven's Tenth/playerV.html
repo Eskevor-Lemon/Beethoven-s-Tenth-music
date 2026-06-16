@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频播放器</title>
+
+  <style>
+    body {
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.7;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    .player-box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    video {
+      width: 100%;
+      max-height: 70vh;
+      background: #000;
+      border-radius: 8px;
+    }
+
+    .note {
+      color: #666;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    a {
+      color: #3366cc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="player-box">
+    <h1 id="video-title">视频播放器</h1>
+
+    <video id="video-player" controls preload="metadata">
+      你的浏览器不支持视频播放。
+    </video>
+
+    <p class="note">
+      如果播放器无法加载，请点击：
+      <a id="direct-link" href="#" target="_blank" rel="noopener">直接打开视频文件</a>
+    </p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const title = params.get("title") || "未命名视频";
+    const src = params.get("src");
+
+    const titleElement = document.getElementById("video-title");
+    const videoElement = document.getElementById("video-player");
+    const directLink = document.getElementById("direct-link");
+
+    titleElement.textContent = title;
+
+    if (src) {
+      const videoUrl = new URL(src, window.location.href).href;
+
+      videoElement.src = videoUrl;
+      directLink.href = videoUrl;
+    } else {
+      titleElement.textContent = "未提供视频链接";
+      directLink.textContent = "没有可打开的视频文件";
+    }
+  </script>
+</body>
+</html>
